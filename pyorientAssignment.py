@@ -15,11 +15,11 @@ else:
 	print "database [" + db_name + "] does not exist! session ending..."
 	sys.exit()
 
-lat1 = 22.532498
-lat2 = 22.552317
+	lat1 = 22.532498
+	lat2 = 22.552317
 
-lng1 = 114.044329
-lng2 = 114.076644
+	lng1 = 114.044329
+	lng2 = 114.076644
 
 query = 'SELECT FROM Listing WHERE latitude BETWEEN {} AND {} AND longitude BETWEEN {} AND {}'
 
@@ -36,14 +36,37 @@ print 'received ' + str(numListings) + ' records'
 # then test each price to see if it is smaller than the current minimum. If it is, update 
 # the minimum variable with that price. You can do something similar to find the maximum.
 
+price = []
+
 for record in records:
 	print record.price
+        price.append(record.price)
+ 
+totalPrice = 0
 
+for x in price:
+    totalPrice += x
+    
+averagePrice = totalPrice / len(price)
 
-# [PRINT OUT THE RESULTING VALUES BY CONCATENATING THEM TO THESE LINES TO CHECK YOUR WORK]
+print 'average price = ' + str(averagePrice)
 
-print 'min price: '
-print 'max price: ' 
-print 'average price: '
+minPrice = 9999999999999999999
+
+for x in price:
+    if minPrice > x:
+        minPrice = x
+    else:
+        minPrice = minPrice
+print 'minPrice = ' + str(minPrice)
+
+maxPrice = 0
+
+for x in price:
+    if maxPrice < x:
+        maxPrice = x
+    else:
+        maxPrice = maxPrice
+print 'maxPrice = ' + str(maxPrice)
 
 client.db_close()
